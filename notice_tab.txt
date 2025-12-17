@@ -1,0 +1,5 @@
+Til's Macro (INDEV)
+- This macro is in beta, it may contain bugs.
+- If you encounter a bug, report it to me.
+
+Currently working on: Bringing macro to Windows.
