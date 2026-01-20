@@ -6,4 +6,4 @@ Currently working on: Bringing macro to Windows.
 
 TO-DO:
 - Add Windows compatability
-- Biome data failsafe
+- Biome data failsafe (in testing)
