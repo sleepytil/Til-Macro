@@ -1,5 +1,5 @@
-Til's Macro (INDEV)
-- This macro is in ALPHA, it may contain bugs.
+Til's Macro (Beta - v0.1)
+- This macro is in BETA, it may contain bugs.
 - If you encounter a bug, report it to me.
 
 Currently working on: Bringing macro to Windows.
