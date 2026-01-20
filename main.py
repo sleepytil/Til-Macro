@@ -58,35 +58,35 @@ class macroActivity(customtkinter.CTk):
 
         self.biome_times = {
             "SAND STORM": 650,
-            "HELL": 666,
-            "STARFALL": 650,
-            "CORRUPTION": 650,
-            "NULL": 99,
-            "WINDY": 120,
-            "RAINY": 120,
-            "SNOWY": 120,
-            "HEAVEN": 240,
-            "GLITCHED": 164,
-            "DREAMSPACE": 192,
-            "CYBERSPACE": 720,
-            "AURORA": 300
+            # "HELL": 666,
+            # "STARFALL": 650,
+            # "CORRUPTION": 650,
+            # "NULL": 99,
+            # "WINDY": 120,
+            # "RAINY": 120,
+            # "SNOWY": 120,
+            # "HEAVEN": 240,
+            # "GLITCHED": 164,
+            # "DREAMSPACE": 192,
+            # "CYBERSPACE": 720,
+            # "AURORA": 300
         }
 
         self.biome_colours = {
             "NORMAL": "FFFFFF",
             "SAND STORM": "F4C27C",
-            "HELL": "5C1219",
-            "STARFALL": "6784E0",
-            "CORRUPTION": "9042FF",
-            "NULL": "000000",
-            "WINDY": "91F7FF",
-            "RAINY": "4385FF",
-            "SNOWY": "C4F5F6",
-            "HEAVEN": "FFEE8C",
-            "GLITCHED": "65FF65",
-            "DREAMSPACE": "FF7DFF",
-            "CYBERSPACE": "03045E",
-            "AURORA": "C1C3F9"
+            # "HELL": "5C1219",
+            # "STARFALL": "6784E0",
+            # "CORRUPTION": "9042FF",
+            # "NULL": "000000",
+            # "WINDY": "91F7FF",
+            # "RAINY": "4385FF",
+            # "SNOWY": "C4F5F6",
+            # "HEAVEN": "FFEE8C",
+            # "GLITCHED": "65FF65",
+            # "DREAMSPACE": "FF7DFF",
+            # "CYBERSPACE": "03045E",
+            # "AURORA": "C1C3F9"
         }
 
         # UI
