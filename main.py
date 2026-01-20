@@ -310,9 +310,9 @@ class macroActivity(customtkinter.CTk):
                                                 pass
                                         else:
                                             print(time.strftime('%H:%M:%S') + f": Biome Started - {event}")
-                                            biomeEndingTime = int(time.time()) + self.biome_times[event]
+                                            biomeEndingTime = int(time.time()) + int(self.biome_times[event] or 0)
                                             embed = discord_webhook.DiscordEmbed(title=f"Biome Started - {event}",
-                                                                                description=f"{self.psURL.get()}\n-# Ends <t:{str(biomeEndingTime) or str(time.time())}:R>",
+                                                                                description=f"{self.psURL.get()}\n-# Ends <t:{str(biomeEndingTime)}:R>",
                                                                                 color=self.biome_colours[event] or "FFFFFF")
                                             embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                             embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
@@ -337,10 +337,10 @@ class macroActivity(customtkinter.CTk):
                                                 pass
                                         else:
                                             print(time.strftime('%H:%M:%S') + f": Biome Started - {event}")
-                                            biomeEndingTime = int(time.time()) + self.biome_times[event]            
+                                            biomeEndingTime = int(time.time()) + int(self.biome_times[event] or 0)        
                                             for url in self.webhook_urls:
                                                 embed = discord_webhook.DiscordEmbed(title=f"Biome Started - {event}",
-                                                                                description=f"{self.psURL.get()}\n-# Ends <t:{str(biomeEndingTime) or str(time.time())}:R>",
+                                                                                description=f"{self.psURL.get()}\n-# Ends <t:{str(biomeEndingTime)}:R>",
                                                                                 color=self.biome_colours[event] or "FFFFFF")
                                                 embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                                 embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
