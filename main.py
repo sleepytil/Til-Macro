@@ -299,9 +299,14 @@ class macroActivity(customtkinter.CTk):
                                         webhook = discord_webhook.DiscordWebhook(url=self.webhookURL.get())
                                         if event == "NORMAL":
                                             if last_event is not None:
+                                                event_biome_colour = ""
+                                                if last_event in self.biome_colours:
+                                                    event_biome_colour = self.biome_colours[last_event]
+                                                else:
+                                                    event_biome_colour = "FFFFFF"
                                                 print(time.strftime('%H:%M:%S') + f": Biome Ended - " + last_event)
                                                 embed = discord_webhook.DiscordEmbed(title=f"Biome Ended - {last_event}",
-                                                                                color=self.biome_colours[last_event] or "FFFFFF")
+                                                                                color=event_biome_colour)
                                                 embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                                 embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                                 webhook.add_embed(embed)
@@ -310,10 +315,19 @@ class macroActivity(customtkinter.CTk):
                                                 pass
                                         else:
                                             print(time.strftime('%H:%M:%S') + f": Biome Started - {event}")
-                                            biomeEndingTime = int(time.time()) + int(self.biome_times[event] or 0)
+
+                                            event_biome_colour = ""
+                                            biomeEndingTime = ""
+                                            if event in self.biome_times and event in self.biome_colours:
+                                                biomeEndingTime = int(time.time()) + int(self.biome_times[event])
+                                                event_biome_colour = self.biome_colours[event]
+                                            else:
+                                                biomeEndingTime = int(time.time())
+                                                event_biome_colour = "FFFFFF"
+                                            
                                             embed = discord_webhook.DiscordEmbed(title=f"Biome Started - {event}",
                                                                                 description=f"{self.psURL.get()}\n-# Ends <t:{str(biomeEndingTime)}:R>",
-                                                                                color=self.biome_colours[event] or "FFFFFF")
+                                                                                color=event_biome_colour)
                                             embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                             embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                             embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/" + event.replace(" ", "%20") + ".png")
@@ -325,10 +339,16 @@ class macroActivity(customtkinter.CTk):
                                         if event == "NORMAL":
                                             if last_event is not None:
                                                 print(time.strftime('%H:%M:%S') + f": Biome Ended - " + last_event)
+                                                event_biome_colour = ""
+                                                if last_event in self.biome_colours:
+                                                    event_biome_colour = self.biome_colours[last_event]
+                                                else:
+                                                    event_biome_colour = "FFFFFF"
+                                                
                                                 for url in self.webhook_urls:
                                                     webhook = discord_webhook.DiscordWebhook(url=url)
                                                     embed = discord_webhook.DiscordEmbed(title=f"Biome Ended - {last_event}",
-                                                                                color=self.biome_colours[last_event] or "FFFFFF")
+                                                                                color=event_biome_colour)
                                                     embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                                     embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                                     webhook.add_embed(embed)
@@ -337,11 +357,19 @@ class macroActivity(customtkinter.CTk):
                                                 pass
                                         else:
                                             print(time.strftime('%H:%M:%S') + f": Biome Started - {event}")
-                                            biomeEndingTime = int(time.time()) + int(self.biome_times[event] or 0)        
+                                            event_biome_colour = ""
+                                            biomeEndingTime = ""
+                                            if event in self.biome_times and event in self.biome_colours:
+                                                biomeEndingTime = int(time.time()) + int(self.biome_times[event])
+                                                event_biome_colour = self.biome_colours[event]
+                                            else:
+                                                biomeEndingTime = int(time.time())
+                                                event_biome_colour = "FFFFFF"
+                                            
                                             for url in self.webhook_urls:
                                                 embed = discord_webhook.DiscordEmbed(title=f"Biome Started - {event}",
                                                                                 description=f"{self.psURL.get()}\n-# Ends <t:{str(biomeEndingTime)}:R>",
-                                                                                color=self.biome_colours[event] or "FFFFFF")
+                                                                                color=event_biome_colour)
                                                 embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                                 embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                                 embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/" + event.replace(" ", "%20") + ".png")
