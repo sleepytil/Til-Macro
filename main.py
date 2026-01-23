@@ -47,7 +47,7 @@ class macroActivity(customtkinter.CTk):
         self.aura_detection = customtkinter.IntVar(self, int(self.config['Macro']['aura_detection']))
         webhook_urls_string = customtkinter.StringVar(self, self.config['Webhook']['multi_webhook_urls'])
         self.webhook_urls = webhook_urls_string.get().split()
-        self.totalBiomesFound = self.config['Stats']['total_biomes_discovered']
+        self.totalBiomesFound = int(self.config['Stats']['total_biomes_discovered'])
 
         # Variables
         self.started = False
@@ -326,8 +326,8 @@ class macroActivity(customtkinter.CTk):
                                                 pass
                                         else:
                                             print(time.strftime('%H:%M:%S') + f": Biome Started - {event}")
-                                            self.totalBiomesFound += 1
-                                            self.total_biomes_label.configure(text=f"{self.totalBiomesFound}")
+                                            self.totalBiomesFound = int(self.totalBiomesFound) + 1
+                                            self.total_biomes_amount.configure(text=f"{self.totalBiomesFound}")
                                             event_biome_colour = ""
                                             biomeEndingTime = ""
                                             if event in self.biome_times and event in self.biome_colours:
@@ -368,8 +368,8 @@ class macroActivity(customtkinter.CTk):
                                                 pass
                                         else:
                                             print(time.strftime('%H:%M:%S') + f": Biome Started - {event}")
-                                            self.totalBiomesFound += 1
-                                            self.total_biomes_label.configure(text=f"{self.totalBiomesFound}")
+                                            self.totalBiomesFound = int(self.totalBiomesFound) + 1
+                                            self.total_biomes_amount.configure(text=f"{self.totalBiomesFound}")
                                             event_biome_colour = ""
                                             biomeEndingTime = ""
                                             if event in self.biome_times and event in self.biome_colours:
