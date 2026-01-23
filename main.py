@@ -37,6 +37,7 @@ class macroActivity(customtkinter.CTk):
             print("Config file not found, creating one...")
             self.config['Webhook'] = {'webhook_url': "", 'private_server': "",  'multi_webhook': "0", 'multi_webhook_urls': ""}
             self.config['Macro'] = {'aura_detection': "0", 'last_roblox_version': ""}
+            self.config['Stats'] = {'total_biomes_discovered': "0"}
             with open(self.config_name, 'w') as configfile:
                 self.config.write(configfile)
         self.config.read(self.config_name)
@@ -46,6 +47,7 @@ class macroActivity(customtkinter.CTk):
         self.aura_detection = customtkinter.IntVar(self, int(self.config['Macro']['aura_detection']))
         webhook_urls_string = customtkinter.StringVar(self, self.config['Webhook']['multi_webhook_urls'])
         self.webhook_urls = webhook_urls_string.get().split()
+        self.totalBiomesFound = customtkinter.StringVar(self, self.config['Stats']['total_biomes_discovered'])
 
         # Variables
         self.started = False
@@ -99,6 +101,7 @@ class macroActivity(customtkinter.CTk):
         tabview.add("Home")
         tabview.add("Webhook")
         tabview.add("Config")
+        tabview.add("Stats")
         tabview.add("Credits")
         tabview.set("Home")
         tabview._segmented_button.configure(font=customtkinter.CTkFont(family="Segoe UI", size=16))
@@ -117,7 +120,7 @@ class macroActivity(customtkinter.CTk):
                                        command=self.stop)
         stop_button.grid(row=1, column=1, padx=(10, 0), pady=(10, 0), sticky="w")
 
-        version_label = customtkinter.CTkLabel(tabview.tab("Home"), text="BETA BUILD (V0.1)", font=customtkinter.CTkFont(family="Segoe UI", size=14, weight="bold"))
+        version_label = customtkinter.CTkLabel(tabview.tab("Home"), text="BETA BUILD (V0.11)", font=customtkinter.CTkFont(family="Segoe UI", size=14, weight="bold"))
         version_label.grid(row=1, column=0, padx=(5, 0), sticky="nw")
 
         self.state_label = customtkinter.CTkLabel(tabview.tab("Home"), text="Macro Stopped", font=customtkinter.CTkFont(family="Segoe UI", size=14, weight="bold"))
@@ -159,6 +162,14 @@ class macroActivity(customtkinter.CTk):
                                              font=customtkinter.CTkFont(family="Segoe UI", size=20),
                                              variable=self.aura_detection, command=self.auradetection_toggle_update)
         detection_toggle.grid(row=0, column=0, columnspan=2, padx=(10, 0), pady=(10, 0), sticky="w")
+
+        total_biomes_label = customtkinter.CTkLabel(tabview.tab("Stats"), text="Total Biomes Found:",
+                                       font=customtkinter.CTkFont(family="Segoe UI", size=20))
+        total_biomes_label.grid(column=0, row=0, columnspan=2, padx=(10, 0), pady=(5, 0), sticky="w")
+
+        total_biomes_amount = customtkinter.CTkLabel(tabview.tab("Stats"),
+                                       font=customtkinter.CTkFont(family="Segoe UI", size=20), textvariable=self.totalBiomesFound)
+        total_biomes_amount.grid(column=0, row=0, columnspan=2, padx=(10, 0), pady=(5, 0), sticky="w")
     
     def popup(self, message, title):
         applescript = """
@@ -185,7 +196,7 @@ class macroActivity(customtkinter.CTk):
     def startMacro(self):
         if self.started: return
         embed = discord_webhook.DiscordEmbed(title="Macro Started",
-                                             description="Version: **Beta - v0.1**\n\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
+                                             description="Version: **v0.11**\n\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
                                              color="00FF00")
         embed.set_footer("Til's Macro", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
         embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
@@ -305,9 +316,9 @@ class macroActivity(customtkinter.CTk):
                                                 else:
                                                     event_biome_colour = "FFFFFF"
                                                 print(time.strftime('%H:%M:%S') + f": Biome Ended - " + last_event)
-                                                embed = discord_webhook.DiscordEmbed(description=f"> ###å Biome Ended - {last_event}",
+                                                embed = discord_webhook.DiscordEmbed(description=f"> ### Biome Ended - {last_event}",
                                                                                 color=event_biome_colour)
-                                                embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                                                embed.set_footer("Til's Macro (v0.11)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                                 embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                                 webhook.add_embed(embed)
                                                 webhook.execute()
@@ -315,7 +326,7 @@ class macroActivity(customtkinter.CTk):
                                                 pass
                                         else:
                                             print(time.strftime('%H:%M:%S') + f": Biome Started - {event}")
-
+                                            self.totalBiomesFound += 1
                                             event_biome_colour = ""
                                             biomeEndingTime = ""
                                             if event in self.biome_times and event in self.biome_colours:
@@ -327,7 +338,7 @@ class macroActivity(customtkinter.CTk):
                                             
                                             embed = discord_webhook.DiscordEmbed(description=f"> ### Biome Started - {event}\n[Join Private Server]({self.psURL.get()})\n-# Ends <t:{str(biomeEndingTime)}:R>",
                                                                                 color=event_biome_colour)
-                                            embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                                            embed.set_footer("Til's Macro (v0.11)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                             embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                             embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/" + event.replace(" ", "%20") + ".png")
                                             webhook.add_embed(embed)
@@ -348,7 +359,7 @@ class macroActivity(customtkinter.CTk):
                                                     webhook = discord_webhook.DiscordWebhook(url=url)
                                                     embed = discord_webhook.DiscordEmbed(description=f"> ### Biome Ended - {last_event}",
                                                                                 color=event_biome_colour)
-                                                    embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                                                    embed.set_footer("Til's Macro (v0.11)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                                     embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                                     webhook.add_embed(embed)
                                                     webhook.execute()
@@ -356,6 +367,7 @@ class macroActivity(customtkinter.CTk):
                                                 pass
                                         else:
                                             print(time.strftime('%H:%M:%S') + f": Biome Started - {event}")
+                                            self.totalBiomesFound += 1
                                             event_biome_colour = ""
                                             biomeEndingTime = ""
                                             if event in self.biome_times and event in self.biome_colours:
@@ -368,7 +380,7 @@ class macroActivity(customtkinter.CTk):
                                             for url in self.webhook_urls:
                                                 embed = discord_webhook.DiscordEmbed(description=f"> ### Biome Started - {event}\n[Join Private Server]({self.psURL.get()})\n-# Ends <t:{str(biomeEndingTime)}:R>",
                                                                                 color=event_biome_colour)
-                                                embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                                                embed.set_footer("Til's Macro (v0.11)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                                 embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                                 embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/" + event.replace(" ", "%20") + ".png")
                                                 webhook = discord_webhook.DiscordWebhook(url=url)
@@ -388,7 +400,7 @@ class macroActivity(customtkinter.CTk):
                                             print(time.strftime('%H:%M:%S') + f": Aura Equipped - {aura}")
                                             embed = discord_webhook.DiscordEmbed(title=f"Aura Equipped - {aura}",
                                                                                 color="4848FF")
-                                            embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                                            embed.set_footer("Til's Macro (v0.11)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                             embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                             webhook.add_embed(embed)
                                             webhook.execute()
@@ -398,7 +410,7 @@ class macroActivity(customtkinter.CTk):
                                                 webhook = discord_webhook.DiscordWebhook(url=url)
                                                 embed = discord_webhook.DiscordEmbed(title=f"Aura Equipped - {aura}",
                                                                                 color="4848FF")
-                                                embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                                                embed.set_footer("Til's Macro (v0.11)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                                 embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                                 webhook.add_embed(embed)
                                                 webhook.execute()
@@ -417,7 +429,7 @@ class macroActivity(customtkinter.CTk):
                     close_webhook = discord_webhook.DiscordWebhook(url=url)
                     close_embed = discord_webhook.DiscordEmbed(title=f"Roblox Closed/Crashed",
                                                                color="FF0000")
-                    close_embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                    close_embed.set_footer("Til's Macro (v0.11)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                     close_embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                     close_webhook.add_embed(close_embed)
                     close_webhook.execute()
@@ -426,7 +438,7 @@ class macroActivity(customtkinter.CTk):
                         close_webhook = discord_webhook.DiscordWebhook(url=url)
                         close_embed = discord_webhook.DiscordEmbed(title=f"Roblox Closed/Crashed",
                                                                    color="FF0000")
-                        close_embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                        close_embed.set_footer("Til's Macro (v0.11)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                         close_embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                         close_webhook.add_embed(close_embed)
                         close_webhook.execute()
@@ -480,7 +492,7 @@ class macroActivity(customtkinter.CTk):
                 if "discord.com" in self.webhookURL.get() and "https://" in self.webhookURL.get():
                     ending_webhook = discord_webhook.DiscordWebhook(url=self.webhookURL.get())
                     ending_embed = discord_webhook.DiscordEmbed(title=f"Macro Stopped",
-                                                                description="Version: **Beta - v0.1**\n\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
+                                                                description="Version: **v0.11**\n\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
                                                                 color="FF0000")
                     ending_embed.set_footer("Til's Macro", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                     ending_embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
@@ -490,7 +502,7 @@ class macroActivity(customtkinter.CTk):
 
             else:
                 ending_embed = discord_webhook.DiscordEmbed(title=f"Macro Stopped",
-                                                            description="Version: **Beta - v0.1**\n\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
+                                                            description="Version: **v0.11**\n\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
                                                             color="FF0000")
                 ending_embed.set_footer("Til's Macro", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                 ending_embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
@@ -515,7 +527,7 @@ class macroActivity(customtkinter.CTk):
             embed = {
                 "description": f"> ## Game Screenshot",
                 "color": 0xffffff,
-                "footer": {"text": "Til's Macro (Beta - v0.1)", "icon_url": icon_url},
+                "footer": {"text": "Til's Macro (v0.11)", "icon_url": icon_url},
                 "timestamp": current_utc_time
             }
             if self.multi_webhook.get() != "1":
