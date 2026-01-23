@@ -483,6 +483,7 @@ class macroActivity(customtkinter.CTk):
         # write config data
         self.config.set('Webhook', 'webhook_url', self.webhookURL.get())
         self.config.set('Webhook', 'private_server', self.psURL.get())
+        self.config.set('Stats', 'total_biomes_discovered', self.totalBiomesFound.get())
         with open(self.config_name, 'w+') as configfile:
             self.config.write(configfile)
 
