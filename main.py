@@ -168,7 +168,7 @@ class macroActivity(customtkinter.CTk):
         total_biomes_label.grid(column=0, row=0, columnspan=2, padx=(10, 0), pady=(5, 0), sticky="w")
 
         self.total_biomes_amount = customtkinter.CTkLabel(tabview.tab("Stats"),
-                                       font=customtkinter.CTkFont(family="Segoe UI", size=20), text=f"{str(self.totalBiomesFound)}")
+                                       font=customtkinter.CTkFont(family="Segoe UI", size=20), text=f"{self.totalBiomesFound}")
         self.total_biomes_amount.grid(column=1, row=0, columnspan=2, padx=(195, 0), pady=(5, 0), sticky="w")
     
     def popup(self, message, title):
@@ -327,7 +327,7 @@ class macroActivity(customtkinter.CTk):
                                         else:
                                             print(time.strftime('%H:%M:%S') + f": Biome Started - {event}")
                                             self.totalBiomesFound += 1
-                                            self.total_biomes_label.configure(text=f"{str(self.totalBiomesFound)}")
+                                            self.total_biomes_label.configure(text=f"{self.totalBiomesFound}")
                                             event_biome_colour = ""
                                             biomeEndingTime = ""
                                             if event in self.biome_times and event in self.biome_colours:
@@ -369,7 +369,7 @@ class macroActivity(customtkinter.CTk):
                                         else:
                                             print(time.strftime('%H:%M:%S') + f": Biome Started - {event}")
                                             self.totalBiomesFound += 1
-                                            self.total_biomes_label.configure(text=f"{str(self.totalBiomesFound)}")
+                                            self.total_biomes_label.configure(text=f"{self.totalBiomesFound}")
                                             event_biome_colour = ""
                                             biomeEndingTime = ""
                                             if event in self.biome_times and event in self.biome_colours:
