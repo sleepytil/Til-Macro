@@ -47,7 +47,7 @@ class macroActivity(customtkinter.CTk):
         self.aura_detection = customtkinter.IntVar(self, int(self.config['Macro']['aura_detection']))
         webhook_urls_string = customtkinter.StringVar(self, self.config['Webhook']['multi_webhook_urls'])
         self.webhook_urls = webhook_urls_string.get().split()
-        self.totalBiomesFound = customtkinter.StringVar(self, self.config['Stats']['total_biomes_discovered'])
+        self.totalBiomesFound = self.config['Stats']['total_biomes_discovered']
 
         # Variables
         self.started = False
@@ -167,9 +167,9 @@ class macroActivity(customtkinter.CTk):
                                        font=customtkinter.CTkFont(family="Segoe UI", size=20))
         total_biomes_label.grid(column=0, row=0, columnspan=2, padx=(10, 0), pady=(5, 0), sticky="w")
 
-        total_biomes_amount = customtkinter.CTkLabel(tabview.tab("Stats"),
-                                       font=customtkinter.CTkFont(family="Segoe UI", size=20), textvariable=self.totalBiomesFound)
-        total_biomes_amount.grid(column=0, row=0, columnspan=2, padx=(10, 0), pady=(5, 0), sticky="w")
+        self.total_biomes_amount = customtkinter.CTkLabel(tabview.tab("Stats"),
+                                       font=customtkinter.CTkFont(family="Segoe UI", size=20), text=f"{str(self.totalBiomesFound)}")
+        self.total_biomes_amount.grid(column=1, row=0, columnspan=2, padx=(195, 0), pady=(5, 0), sticky="w")
     
     def popup(self, message, title):
         applescript = """
@@ -327,6 +327,7 @@ class macroActivity(customtkinter.CTk):
                                         else:
                                             print(time.strftime('%H:%M:%S') + f": Biome Started - {event}")
                                             self.totalBiomesFound += 1
+                                            self.total_biomes_label.configure(text=f"{str(self.totalBiomesFound)}")
                                             event_biome_colour = ""
                                             biomeEndingTime = ""
                                             if event in self.biome_times and event in self.biome_colours:
@@ -368,6 +369,7 @@ class macroActivity(customtkinter.CTk):
                                         else:
                                             print(time.strftime('%H:%M:%S') + f": Biome Started - {event}")
                                             self.totalBiomesFound += 1
+                                            self.total_biomes_label.configure(text=f"{str(self.totalBiomesFound)}")
                                             event_biome_colour = ""
                                             biomeEndingTime = ""
                                             if event in self.biome_times and event in self.biome_colours:
