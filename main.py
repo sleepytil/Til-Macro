@@ -305,7 +305,7 @@ class macroActivity(customtkinter.CTk):
                                                 else:
                                                     event_biome_colour = "FFFFFF"
                                                 print(time.strftime('%H:%M:%S') + f": Biome Ended - " + last_event)
-                                                embed = discord_webhook.DiscordEmbed(title=f"Biome Ended - {last_event}",
+                                                embed = discord_webhook.DiscordEmbed(description=f"> ## Biome Ended - {last_event}",
                                                                                 color=event_biome_colour)
                                                 embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                                 embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
@@ -325,8 +325,7 @@ class macroActivity(customtkinter.CTk):
                                                 biomeEndingTime = int(time.time())
                                                 event_biome_colour = "FFFFFF"
                                             
-                                            embed = discord_webhook.DiscordEmbed(title=f"Biome Started - {event}",
-                                                                                description=f"{self.psURL.get()}\n-# Ends <t:{str(biomeEndingTime)}:R>",
+                                            embed = discord_webhook.DiscordEmbed(description=f"Biome Started - {event}\n[Join Private Server]({self.psURL.get()})\n-# Ends <t:{str(biomeEndingTime)}:R>",
                                                                                 color=event_biome_colour)
                                             embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                             embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
@@ -347,7 +346,7 @@ class macroActivity(customtkinter.CTk):
                                                 
                                                 for url in self.webhook_urls:
                                                     webhook = discord_webhook.DiscordWebhook(url=url)
-                                                    embed = discord_webhook.DiscordEmbed(title=f"Biome Ended - {last_event}",
+                                                    embed = discord_webhook.DiscordEmbed(description=f"> ## Biome Ended - {last_event}",
                                                                                 color=event_biome_colour)
                                                     embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                                     embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
@@ -367,8 +366,7 @@ class macroActivity(customtkinter.CTk):
                                                 event_biome_colour = "FFFFFF"
                                             
                                             for url in self.webhook_urls:
-                                                embed = discord_webhook.DiscordEmbed(title=f"Biome Started - {event}",
-                                                                                description=f"{self.psURL.get()}\n-# Ends <t:{str(biomeEndingTime)}:R>",
+                                                embed = discord_webhook.DiscordEmbed(description=f"Biome Started - {event}\n[Join Private Server]({self.psURL.get()})\n-# Ends <t:{str(biomeEndingTime)}:R>",
                                                                                 color=event_biome_colour)
                                                 embed.set_footer("Til's Macro (Beta - v0.1)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                                 embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
