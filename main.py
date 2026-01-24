@@ -400,7 +400,7 @@ class macroActivity(customtkinter.CTk):
                                                 return
                                             webhook = discord_webhook.DiscordWebhook(url=self.webhookURL.get())
                                             print(time.strftime('%H:%M:%S') + f": Aura Equipped - {aura}")
-                                            embed = discord_webhook.DiscordEmbed(description=f"> ### Aura Equipped\n{aura}",
+                                            embed = discord_webhook.DiscordEmbed(description=f"> ### Aura Equipped - {aura}",
                                                                                 color="FFFFFF")
                                             embed.set_footer("Til's Macro (v0.11)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                             embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
@@ -410,7 +410,7 @@ class macroActivity(customtkinter.CTk):
                                             print(time.strftime('%H:%M:%S') + f": Aura Equipped - {aura}")
                                             for url in self.webhook_urls:
                                                 webhook = discord_webhook.DiscordWebhook(url=url)
-                                                embed = discord_webhook.DiscordEmbed(description=f"> ### Aura Equipped\n{aura}",
+                                                embed = discord_webhook.DiscordEmbed(description=f"> ### Aura Equipped - {aura}",
                                                                                 color="FFFFFF")
                                                 embed.set_footer("Til's Macro (v0.11)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                                                 embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
