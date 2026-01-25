@@ -195,7 +195,7 @@ class macroActivity(customtkinter.CTk):
 
     def startMacro(self):
         if self.started: return
-        embed = discord_webhook.DiscordEmbed(description="> ### Macro Started\n-# **Join our Discord server**: https://discord.gg/xymDbw7jJV",
+        embed = discord_webhook.DiscordEmbed(description="> ### Macro Started\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
                                              color="00FF00")
         embed.set_footer("Til's Macro (v0.11)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
         embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
@@ -493,7 +493,7 @@ class macroActivity(customtkinter.CTk):
             if self.multi_webhook.get() != "1":
                 if "discord.com" in self.webhookURL.get() and "https://" in self.webhookURL.get():
                     ending_webhook = discord_webhook.DiscordWebhook(url=self.webhookURL.get())
-                    ending_embed = discord_webhook.DiscordEmbed(description="> ### Macro Stopped\n-# **Join our Discord server**: https://discord.gg/xymDbw7jJV",
+                    ending_embed = discord_webhook.DiscordEmbed(description="> ### Macro Stopped\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
                                                                 color="FF0000")
                     ending_embed.set_footer("Til's Macro", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                     ending_embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
@@ -502,7 +502,7 @@ class macroActivity(customtkinter.CTk):
                     ending_webhook.execute()
 
             else:
-                ending_embed = discord_webhook.DiscordEmbed(description="> ### Macro Stopped\n-# **Join our Discord server**: https://discord.gg/xymDbw7jJV",
+                ending_embed = discord_webhook.DiscordEmbed(description="> ### Macro Stopped\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
                                                             color="FF0000")
                 ending_embed.set_footer("Til's Macro", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                 ending_embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
