@@ -195,8 +195,7 @@ class macroActivity(customtkinter.CTk):
 
     def startMacro(self):
         if self.started: return
-        embed = discord_webhook.DiscordEmbed(title="Macro Started",
-                                             description="Version: **v0.11**\n\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
+        embed = discord_webhook.DiscordEmbed(description="> ### Macro Started\n-# Version: **v0.11**\n\n-# **Join our Discord server**: https://discord.gg/xymDbw7jJV",
                                              color="00FF00")
         embed.set_footer("Til's Macro", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
         embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
@@ -429,7 +428,7 @@ class macroActivity(customtkinter.CTk):
                         self.stop()
                         return
                     close_webhook = discord_webhook.DiscordWebhook(url=url)
-                    close_embed = discord_webhook.DiscordEmbed(title=f"Roblox Closed/Crashed",
+                    close_embed = discord_webhook.DiscordEmbed(description=f"> ### Roblox Closed/Crashed",
                                                                color="FF0000")
                     close_embed.set_footer("Til's Macro (v0.11)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                     close_embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
@@ -438,7 +437,7 @@ class macroActivity(customtkinter.CTk):
                 else:
                     for url in self.webhook_urls:
                         close_webhook = discord_webhook.DiscordWebhook(url=url)
-                        close_embed = discord_webhook.DiscordEmbed(title=f"Roblox Closed/Crashed",
+                        close_embed = discord_webhook.DiscordEmbed(description=f"> ### Roblox Closed/Crashed",
                                                                    color="FF0000")
                         close_embed.set_footer("Til's Macro (v0.11)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                         close_embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
@@ -494,8 +493,7 @@ class macroActivity(customtkinter.CTk):
             if self.multi_webhook.get() != "1":
                 if "discord.com" in self.webhookURL.get() and "https://" in self.webhookURL.get():
                     ending_webhook = discord_webhook.DiscordWebhook(url=self.webhookURL.get())
-                    ending_embed = discord_webhook.DiscordEmbed(title=f"Macro Stopped",
-                                                                description="Version: **v0.11**\n\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
+                    ending_embed = discord_webhook.DiscordEmbed(description="> ### Macro Stopped\n-# Version: **v0.11**\n\n-# **Join our Discord server**: https://discord.gg/xymDbw7jJV",
                                                                 color="FF0000")
                     ending_embed.set_footer("Til's Macro", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                     ending_embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
@@ -504,8 +502,7 @@ class macroActivity(customtkinter.CTk):
                     ending_webhook.execute()
 
             else:
-                ending_embed = discord_webhook.DiscordEmbed(title=f"Macro Stopped",
-                                                            description="Version: **v0.11**\n\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
+                ending_embed = discord_webhook.DiscordEmbed(description="> ### Macro Stopped\n-# Version: **v0.11**\n\n-# **Join our Discord server**: https://discord.gg/xymDbw7jJV",
                                                             color="FF0000")
                 ending_embed.set_footer("Til's Macro", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                 ending_embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
