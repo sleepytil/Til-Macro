@@ -31,6 +31,7 @@ class macroActivity(customtkinter.CTk):
         self.logger = logging.getLogger('mylogger')
 
         # Variables > Read Config
+        self.ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
         self.config_name = 'config.ini'
         self.config = configparser.ConfigParser()
         if not os.path.exists(self.config_name):
@@ -349,7 +350,7 @@ class macroActivity(customtkinter.CTk):
                                             if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE" or event == "SNOWY":
                                                 # 2. Choose a filename (timestamped to avoid overwriting)
                                                 timestamp = time.strftime("%Y%m%d_%H%M%S")
-                                                screenshot_path = Path(f"screenshot_{timestamp}.png")
+                                                screenshot_path = os.path.join(self.ROOT_DIR, f'screenshot_{timestamp}.png')
 
                                                 # 3. Take screenshot
                                                 self.take_screenshot(screenshot_path)
