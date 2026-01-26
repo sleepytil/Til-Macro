@@ -350,7 +350,7 @@ class macroActivity(customtkinter.CTk):
                                             if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE" or event == "SNOWY":
                                                 # 2. Choose a filename (timestamped to avoid overwriting)
                                                 timestamp = time.strftime("%Y%m%d_%H%M%S")
-                                                screenshot_path = Path(f"screenshot_{timestamp}.png")
+                                                screenshot_path = Path(f"images/screenshot_{timestamp}.png")
 
                                                 # 3. Take screenshot
                                                 self.take_screenshot(screenshot_path)
