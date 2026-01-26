@@ -350,7 +350,7 @@ class macroActivity(customtkinter.CTk):
                                             if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE" or event == "SNOWY":
                                                 # 2. Choose a filename (timestamped to avoid overwriting)
                                                 timestamp = time.strftime("%Y%m%d_%H%M%S")
-                                                screenshot_path = os.path.join(self.ROOT_DIR, f'screenshot_{timestamp}.png')
+                                                screenshot_path = Path(f"screenshot_{timestamp}.png")
 
                                                 # 3. Take screenshot
                                                 self.take_screenshot(screenshot_path)
@@ -586,16 +586,9 @@ class macroActivity(customtkinter.CTk):
         return data
     
     def take_screenshot(self, save_path):
-        result = subprocess.run(
-            ["screencapture", "-x", str(save_path)],
-            capture_output=True,
-            text=True
-        )
-
-        if result.returncode != 0:
-            raise RuntimeError(
-                f"screencapture failed with code {result.returncode}: {result.stderr}"
-            )
+        screenshot = pyautogui.screenshot()
+        screenshot.save(save_path)
+        return save_path
     
     def send_to_discord(self, file_path, url, content: str | None = None):
         with file_path.open("rb") as f:
