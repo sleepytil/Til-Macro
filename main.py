@@ -16,6 +16,7 @@ import logging
 import pyautogui
 import webbrowser
 from PIL import Image
+from pathlib import Path
 
 class macroActivity(customtkinter.CTk):
     def __init__(self):
@@ -345,6 +346,14 @@ class macroActivity(customtkinter.CTk):
                                             if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE":
                                                 webhook.set_content("@everyone")
                                             webhook.execute()
+                                            if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE" or event == "SNOWY":
+                                                # 2. Choose a filename (timestamped to avoid overwriting)
+                                                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                                                screenshot_path = Path(f"screenshot_{timestamp}.png")
+
+                                                # 3. Take screenshot
+                                                self.take_screenshot(screenshot_path)
+                                                self.send_to_discord(screenshot_path, self.webhookURL.get(), content=f"-# Til's Macro (v0.12)\n> ### Biome Screenshot - {event}")
                                     else:
                                         if event == "NORMAL":
                                             if last_event is not None:
@@ -574,7 +583,23 @@ class macroActivity(customtkinter.CTk):
             self.error_logging(e, f"Error loading notice_tab.txt from {url}")
 
         return data
+    
+    def take_screenshot(self, save_path):
+        screenshot = pyautogui.screenshot()
+        screenshot.save(save_path)
+        return save_path
+    
+    def send_to_discord(self, file_path, url, content: str | None = None):
+        with file_path.open("rb") as f:
+            files = {
+                    "file": (file_path.name, f, "image/png")
+            }
 
+            data = {}
+            data["content"] = content
+
+            response = requests.post(url, data=data, files=files, timeout=30)
+            response.raise_for_status()
 
 
 root = macroActivity()
