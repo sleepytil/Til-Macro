@@ -348,7 +348,7 @@ class macroActivity(customtkinter.CTk):
                                             webhook.execute()
                                             if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE" or event == "SNOWY":
                                                 # 2. Choose a filename (timestamped to avoid overwriting)
-                                                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                                                timestamp = time.strftime("%Y%m%d_%H%M%S")
                                                 screenshot_path = Path(f"screenshot_{timestamp}.png")
 
                                                 # 3. Take screenshot
