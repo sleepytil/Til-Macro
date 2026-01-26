@@ -586,9 +586,16 @@ class macroActivity(customtkinter.CTk):
         return data
     
     def take_screenshot(self, save_path):
-        screenshot = pyautogui.screenshot()
-        screenshot.save(save_path)
-        return save_path
+        result = subprocess.run(
+            ["screencapture", "-x", str(save_path)],
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode != 0:
+            raise RuntimeError(
+                f"screencapture failed with code {result.returncode}: {result.stderr}"
+            )
     
     def send_to_discord(self, file_path, url, content: str | None = None):
         with file_path.open("rb") as f:
