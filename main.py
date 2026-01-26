@@ -608,7 +608,7 @@ class macroActivity(customtkinter.CTk):
                 "embeds": [
                     {
                         "description": content,
-                        "color": 0xffffff,
+                        "color": 0xFFFFFF,
                         "image": {
                             "url": f"attachment://{file_path.name}"
                         },
