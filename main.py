@@ -351,7 +351,7 @@ class macroActivity(customtkinter.CTk):
                                             if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE":
                                                 webhook.set_content("@everyone")
                                             webhook.execute()
-                                            if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE" or event == "SNOWY":
+                                            if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE":
                                                 self.send_rare_biome_screenshot()
                                     else:
                                         if event == "NORMAL":
