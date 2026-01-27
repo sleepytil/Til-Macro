@@ -199,6 +199,10 @@ class macroActivity(customtkinter.CTk):
         if self.started: return
         embed = discord_webhook.DiscordEmbed(description="> ### Macro Started\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
                                              color="00FF00")
+        if self.multi_webhook.get() != "1":
+            embed.set_description("> ### Macro Started (1 webhook active)\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV")
+        else:
+            embed.set_description(f"> ### Macro Started ({len(self.webhook_urls)} webhooks active)\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV")
         embed.set_footer("Til's Macro (v0.12)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
         embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
         embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
@@ -347,14 +351,8 @@ class macroActivity(customtkinter.CTk):
                                             if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE":
                                                 webhook.set_content("@everyone")
                                             webhook.execute()
-                                            if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE":
-                                                # 2. Choose a filename (timestamped to avoid overwriting)
-                                                timestamp = time.strftime("%Y%m%d_%H%M%S")
-                                                screenshot_path = Path(f"images/screenshot_{timestamp}.png")
-
-                                                # 3. Take screenshot
-                                                self.take_screenshot(screenshot_path)
-                                                self.send_to_discord(screenshot_path, self.webhookURL.get(), content=f"-# Til's Macro (v0.12)\n> ### Biome Screenshot - {event}")
+                                            if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE" or event == "SNOWY":
+                                                self.send_ingame_screenshot()
                                     else:
                                         if event == "NORMAL":
                                             if last_event is not None:
@@ -399,12 +397,8 @@ class macroActivity(customtkinter.CTk):
                                                 if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE":
                                                     webhook.set_content("@everyone")
                                                 webhook.execute()
-                                                if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE":
-                                                    timestamp = time.strftime("%Y%m%d_%H%M%S")
-                                                    screenshot_path = Path(f"images/screenshot_{timestamp}.png")
-
-                                                    self.take_screenshot(screenshot_path)
-                                                    self.send_to_discord(screenshot_path, url, content=f"-# Til's Macro (v0.12)\n> ### Biome Screenshot - {event}")
+                                            if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE":
+                                                self.send_ingame_screenshot()
                                     last_event = event
                                 if state and aura != last_aura and aura != "n":
                                     if self.aura_detection.get() == 1 and aura != "None":
@@ -541,7 +535,7 @@ class macroActivity(customtkinter.CTk):
             icon_url = "https://sleepytil.github.io/biome_thumb/tilpfp.jpg"
             current_utc_time = str(datetime.datetime.now(datetime.timezone.utc))
             embed = {
-                "description": f"> ## Game Screenshot",
+                "description": f"> ### Game Screenshot",
                 "color": 0xffffff,
                 "footer": {"text": "Til's Macro (v0.12)", "icon_url": icon_url},
                 "timestamp": current_utc_time
@@ -560,7 +554,6 @@ class macroActivity(customtkinter.CTk):
                             print(f"Failed to send inventory screenshot to {self.webhookURL.get()}: {e}")
                         except Exception:
                             pass
-
             else:
                 for url in self.webhook_urls:
                     try:
