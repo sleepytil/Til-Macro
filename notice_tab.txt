@@ -1,9 +1,9 @@
-Til's Macro (Beta - v0.11)
+Til's Macro (Beta - v0.13)
 - This macro is in BETA, it may contain bugs.
 - If you encounter a bug, report it to me.
 
 Currently working on: Bringing macro to Windows.
-Recently added: Biome Stats
+Recently added: Add cross macro detection, rare biome screenshots
 
 TO-DO:
 - Add Windows compatability
