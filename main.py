@@ -352,7 +352,7 @@ class macroActivity(customtkinter.CTk):
                                                 webhook.set_content("@everyone")
                                             webhook.execute()
                                             if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE" or event == "SNOWY":
-                                                self.send_ingame_screenshot()
+                                                self.send_rare_biome_screenshot()
                                     else:
                                         if event == "NORMAL":
                                             if last_event is not None:
@@ -398,7 +398,7 @@ class macroActivity(customtkinter.CTk):
                                                     webhook.set_content("@everyone")
                                                 webhook.execute()
                                             if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE":
-                                                self.send_ingame_screenshot()
+                                                self.send_rare_biome_screenshot()
                                     last_event = event
                                 if state and aura != last_aura and aura != "n":
                                     if self.aura_detection.get() == 1 and aura != "None":
@@ -525,7 +525,7 @@ class macroActivity(customtkinter.CTk):
             sys.exit()
         self.stopped = True
     
-    def send_ingame_screenshot(self):
+    def send_rare_biome_screenshot(self):
         try:
             os.makedirs("images", exist_ok=True)
             filename = os.path.join("images", f"screenshot_{int(time.time())}.png")
@@ -535,7 +535,7 @@ class macroActivity(customtkinter.CTk):
             icon_url = "https://sleepytil.github.io/biome_thumb/tilpfp.jpg"
             current_utc_time = str(datetime.datetime.now(datetime.timezone.utc))
             embed = {
-                "description": f"> ### Game Screenshot",
+                "description": f"> ### Rare Biome Screenshot",
                 "color": 0xffffff,
                 "footer": {"text": "Til's Macro (v0.12)", "icon_url": icon_url},
                 "timestamp": current_utc_time
@@ -583,23 +583,6 @@ class macroActivity(customtkinter.CTk):
             self.error_logging(e, f"Error loading notice_tab.txt from {url}")
 
         return data
-    
-    def take_screenshot(self, save_path):
-        screenshot = pyautogui.screenshot()
-        screenshot.save(save_path)
-        return save_path
-    
-    def send_to_discord(self, file_path, url, content: str | None = None):
-        with file_path.open("rb") as f:
-            files = {
-                    "file": (file_path.name, f, "image/png")
-            }
-
-            data = {}
-            data["content"] = content
-
-            response = requests.post(url, data=data, files=files, timeout=30)
-            response.raise_for_status()
 
 
 root = macroActivity()
