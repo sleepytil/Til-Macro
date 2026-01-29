@@ -1,3 +1,6 @@
+[PUBLIC TESTING BUILD]
+REPORT BUGS VIA THE PROVIDED CHANNELS
+
 Til's Macro (Beta - v0.13)
 - This macro is in BETA, it may contain bugs.
 - If you encounter a bug, report it to me.
