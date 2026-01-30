@@ -352,7 +352,7 @@ class macroActivity(customtkinter.CTk):
                                                 webhook.set_content("@everyone")
                                             webhook.execute()
                                             if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE":
-                                                self.send_rare_biome_screenshot()
+                                                self.send_rare_biome_screenshot(event)
                                     else:
                                         if event == "NORMAL":
                                             if last_event is not None:
@@ -398,33 +398,11 @@ class macroActivity(customtkinter.CTk):
                                                     webhook.set_content("@everyone")
                                                 webhook.execute()
                                             if event == "GLITCHED" or event == "DREAMSPACE" or event == "CYBERSPACE":
-                                                self.send_rare_biome_screenshot()
+                                                self.send_rare_biome_screenshot(event)
                                     last_event = event
                                 if state and aura != last_aura and aura != "n":
                                     if self.aura_detection.get() == 1 and aura != "None":
-                                        if self.multi_webhook.get() != "1":
-                                            if "discord.com" not in self.webhookURL.get() or "https://" not in self.webhookURL.get():
-                                                self.popup("Invalid or missing webhook link.", "Error")
-                                                self.stop()
-                                                return
-                                            webhook = discord_webhook.DiscordWebhook(url=self.webhookURL.get())
-                                            print(time.strftime('%H:%M:%S') + f": Aura Equipped - {aura}")
-                                            embed = discord_webhook.DiscordEmbed(description=f"> ### Aura Equipped - {aura}",
-                                                                                color="FFFFFF")
-                                            embed.set_footer("Til's Macro (v0.13)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
-                                            embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
-                                            webhook.add_embed(embed)
-                                            webhook.execute()
-                                        else:
-                                            print(time.strftime('%H:%M:%S') + f": Aura Equipped - {aura}")
-                                            for url in self.webhook_urls:
-                                                webhook = discord_webhook.DiscordWebhook(url=url)
-                                                embed = discord_webhook.DiscordEmbed(description=f"> ### Aura Equipped - {aura}",
-                                                                                color="FFFFFF")
-                                                embed.set_footer("Til's Macro (v0.13)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
-                                                embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
-                                                webhook.add_embed(embed)
-                                                webhook.execute()
+                                        self.send_aura_screenshot(aura)
                                     last_aura = aura
                         except json.JSONDecodeError:
                             print("Error decoding JSON")
@@ -525,7 +503,7 @@ class macroActivity(customtkinter.CTk):
             sys.exit()
         self.stopped = True
     
-    def send_rare_biome_screenshot(self):
+    def send_rare_biome_screenshot(self, biome):
         try:
             os.makedirs("images", exist_ok=True)
             filename = os.path.join("images", f"screenshot_{int(time.time())}.png")
@@ -535,7 +513,7 @@ class macroActivity(customtkinter.CTk):
             icon_url = "https://sleepytil.github.io/biome_thumb/tilpfp.jpg"
             current_utc_time = str(datetime.datetime.now(datetime.timezone.utc))
             embed = {
-                "description": f"> ### Rare Biome Screenshot",
+                "description": f"> ### Biome Screenshot - {biome}",
                 "color": 0xffffff,
                 "footer": {"text": "Til's Macro (v0.13)", "icon_url": icon_url},
                 "timestamp": current_utc_time
@@ -583,6 +561,52 @@ class macroActivity(customtkinter.CTk):
             self.error_logging(e, f"Error loading notice_tab.txt from {url}")
 
         return data
+    
+    def send_aura_screenshot(self, aura):
+        try:
+            os.makedirs("images", exist_ok=True)
+            filename = os.path.join("images", f"screenshot_{int(time.time())}.png")
+            img = pyautogui.screenshot()
+            img.save(filename)
+            content = ""
+            icon_url = "https://sleepytil.github.io/biome_thumb/tilpfp.jpg"
+            current_utc_time = str(datetime.datetime.now(datetime.timezone.utc))
+            embed = {
+                "description": f"> ### Aura Equipped - {aura}",
+                "color": 0xffffff,
+                "footer": {"text": "Til's Macro (v0.13)", "icon_url": icon_url},
+                "timestamp": current_utc_time
+            }
+            if self.multi_webhook.get() != "1":
+                if "discord.com" in self.webhookURL.get() and "https://" in self.webhookURL.get():
+                    try:
+                        embed_copy = dict(embed)
+                        embed_copy["image"] = {"url": f"attachment://{os.path.basename(filename)}"}
+                        with open(filename, "rb") as image_file:
+                            files = {"file": (os.path.basename(filename), image_file, "image/png")}
+                            data = {"payload_json": json.dumps({"content": content, "embeds": [embed_copy]})}
+                            requests.post(self.webhookURL.get(), data=data, files=files, timeout=10)
+                    except Exception as e:
+                        try:
+                            print(f"Failed to send aura screenshot to {self.webhookURL.get()}: {e}")
+                        except Exception:
+                            pass
+            else:
+                for url in self.webhook_urls:
+                    try:
+                        embed_copy = dict(embed)
+                        embed_copy["image"] = {"url": f"attachment://{os.path.basename(filename)}"}
+                        with open(filename, "rb") as image_file:
+                            files = {"file": (os.path.basename(filename), image_file, "image/png")}
+                            data = {"payload_json": json.dumps({"content": content, "embeds": [embed_copy]})}
+                            requests.post(url, data=data, files=files, timeout=10)
+                    except Exception as e:
+                        try:
+                            print(f"Failed to send aura screenshot to {url}: {e}")
+                        except Exception:
+                            pass
+        except Exception as e: 
+            print(e, "- Error taking/sending ingame screenshot")
 
 
 root = macroActivity()
