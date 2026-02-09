@@ -36,7 +36,7 @@ class macroActivity(customtkinter.CTk):
         self.config = configparser.ConfigParser()
         if not os.path.exists(self.config_name):
             self.logger.info("Config file not found, creating one...")
-            print("Config file not found, creating one...")
+            print("[DEBUG] Config file not found, creating one...")
             self.config['Webhook'] = {'webhook_url': "", 'private_server': "",  'multi_webhook': "0", 'multi_webhook_urls': ""}
             self.config['Macro'] = {'aura_detection': "0", 'last_roblox_version': ""}
             self.config['Stats'] = {'total_biomes_discovered': "0"}
