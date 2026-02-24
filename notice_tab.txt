@@ -1,12 +1,10 @@
-[PUBLIC TESTING BUILD]
-REPORT BUGS VIA THE PROVIDED CHANNELS
+Zen Macro (v2.0)
+Changelogs:
+- Revamped UI
+- Added the screenshot function (to use, run this in terminal: pip3 install pyautogui)
+- Revamped Embeds (also added new functionality with them)
+- Rare Biome Screenshots
+- Webhook Activity Info
 
-Til's Macro (Beta - v0.13)
-- This macro is in BETA, it may contain bugs.
-- If you encounter a bug, report it to me.
-
-Currently working on: Bringing macro to Windows.
-Recently added: Add cross macro detection, rare biome screenshots
-
-TO-DO:
-- Add Windows compatability
+Eventually, the macro will release on Windows.
+For now, enjoy functionality for Mac users!
