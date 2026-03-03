@@ -203,7 +203,7 @@ class macroActivity(customtkinter.CTk):
             embed.set_description("> ### Macro Started (1 webhook active)\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV")
         else:
             embed.set_description(f"> ### Macro Started ({len(self.webhook_urls)} webhooks active)\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV")
-        embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+        embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/zen.png")
         embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
         embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
         if self.multi_webhook.get() != "1":
@@ -323,7 +323,7 @@ class macroActivity(customtkinter.CTk):
                                                 print(time.strftime('%H:%M:%S') + f": Biome Ended - " + last_event)
                                                 embed = discord_webhook.DiscordEmbed(description=f"> ### Biome Ended - {last_event}",
                                                                                 color=event_biome_colour)
-                                                embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                                                embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/zen.png")
                                                 embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                                 webhook.add_embed(embed)
                                                 webhook.execute()
@@ -344,7 +344,7 @@ class macroActivity(customtkinter.CTk):
                                             
                                             embed = discord_webhook.DiscordEmbed(description=f"> ### Biome Started - {event}\n[Join Private Server]({self.psURL.get()})\n-# Ends <t:{str(biomeEndingTime)}:R>",
                                                                                 color=event_biome_colour)
-                                            embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                                            embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/zen.png")
                                             embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                             embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/" + event.replace(" ", "%20") + ".png")
                                             webhook.add_embed(embed)
@@ -367,7 +367,7 @@ class macroActivity(customtkinter.CTk):
                                                     webhook = discord_webhook.DiscordWebhook(url=url)
                                                     embed = discord_webhook.DiscordEmbed(description=f"> ### Biome Ended - {last_event}",
                                                                                 color=event_biome_colour)
-                                                    embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                                                    embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/zen.png")
                                                     embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                                     webhook.add_embed(embed)
                                                     webhook.execute()
@@ -389,7 +389,7 @@ class macroActivity(customtkinter.CTk):
                                             for url in self.webhook_urls:
                                                 embed = discord_webhook.DiscordEmbed(description=f"> ### Biome Started - {event}\n[Join Private Server]({self.psURL.get()})\n-# Ends <t:{str(biomeEndingTime)}:R>",
                                                                                 color=event_biome_colour)
-                                                embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                                                embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/zen.png")
                                                 embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                                                 embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/" + event.replace(" ", "%20") + ".png")
                                                 webhook = discord_webhook.DiscordWebhook(url=url)
@@ -418,7 +418,7 @@ class macroActivity(customtkinter.CTk):
                     close_webhook = discord_webhook.DiscordWebhook(url=url)
                     close_embed = discord_webhook.DiscordEmbed(description=f"> ### Roblox Closed/Crashed",
                                                                color="FF0000")
-                    close_embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                    close_embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/zen.png")
                     close_embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                     close_webhook.add_embed(close_embed)
                     close_webhook.execute()
@@ -427,7 +427,7 @@ class macroActivity(customtkinter.CTk):
                         close_webhook = discord_webhook.DiscordWebhook(url=url)
                         close_embed = discord_webhook.DiscordEmbed(description=f"> ### Roblox Closed/Crashed",
                                                                    color="FF0000")
-                        close_embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                        close_embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/zen.png")
                         close_embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                         close_webhook.add_embed(close_embed)
                         close_webhook.execute()
@@ -483,7 +483,7 @@ class macroActivity(customtkinter.CTk):
                     ending_webhook = discord_webhook.DiscordWebhook(url=self.webhookURL.get())
                     ending_embed = discord_webhook.DiscordEmbed(description="> ### Macro Stopped\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
                                                                 color="FF0000")
-                    ending_embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                    ending_embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/zen.png")
                     ending_embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                     ending_embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                     ending_webhook.add_embed(ending_embed)
@@ -492,7 +492,7 @@ class macroActivity(customtkinter.CTk):
             else:
                 ending_embed = discord_webhook.DiscordEmbed(description="> ### Macro Stopped\n**Join our Discord server**:\nhttps://discord.gg/xymDbw7jJV",
                                                             color="FF0000")
-                ending_embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
+                ending_embed.set_footer("Zen (v2.0)", icon_url="https://sleepytil.github.io/biome_thumb/zen.png")
                 ending_embed.set_thumbnail(url="https://sleepytil.github.io/biome_thumb/tilpfp.jpg")
                 ending_embed.set_timestamp(datetime.datetime.now(datetime.timezone.utc))
                 for url in self.webhook_urls:
@@ -510,7 +510,7 @@ class macroActivity(customtkinter.CTk):
             img = pyautogui.screenshot()
             img.save(filename)
             content = ""
-            icon_url = "https://sleepytil.github.io/biome_thumb/tilpfp.jpg"
+            icon_url = "https://sleepytil.github.io/biome_thumb/zen.png"
             current_utc_time = str(datetime.datetime.now(datetime.timezone.utc))
             embed = {
                 "description": f"> ### Biome Screenshot - {biome}",
@@ -569,7 +569,7 @@ class macroActivity(customtkinter.CTk):
             img = pyautogui.screenshot()
             img.save(filename)
             content = ""
-            icon_url = "https://sleepytil.github.io/biome_thumb/tilpfp.jpg"
+            icon_url = "https://sleepytil.github.io/biome_thumb/zen.png"
             current_utc_time = str(datetime.datetime.now(datetime.timezone.utc))
             embed = {
                 "description": f"> ### Aura Equipped - {aura}",
