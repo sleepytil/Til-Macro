@@ -550,7 +550,7 @@ class macroActivity(customtkinter.CTk):
             print(e, "- Error taking/sending ingame screenshot")
     
     def load_notice_tab(self):
-        url = "https://raw.githubusercontent.com/sleepytil/Til-Macro/refs/heads/main/notice_tab.txt"
+        url = "https://raw.githubusercontent.com/sleepytil/Zen-Macro/refs/heads/main/notice_tab.txt"
         data = ""
         try:
             r = requests.get(url, timeout=10)
